@@ -77,6 +77,9 @@ typedef void (^MCSwipeCompletionBlock)(MCSwipeTableViewCell *cell, MCSwipeTableV
 @property (nonatomic, assign, readwrite) NSTimeInterval animationDuration;
 
 
+/** The offset of the swipeable cell frame */
+@property (nonatomic, assign, readwrite) CGRect offsetFrame;
+
 /** Color for background, when no state has been triggered. */
 @property (nonatomic, strong, readwrite) UIColor *defaultColor;
 

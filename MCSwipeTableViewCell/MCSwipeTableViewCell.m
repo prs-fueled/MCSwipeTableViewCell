@@ -168,8 +168,10 @@ typedef NS_ENUM(NSUInteger, MCSwipeTableViewCellDirection) {
     if (isContentViewBackgroundClear) {
         self.contentView.backgroundColor = nil;
     }
-    
-    _colorIndicatorView = [[UIView alloc] initWithFrame:self.bounds];
+  
+    CGRect rectWithOffset = [self addRectToRect:self.bounds secondRect:self.offsetFrame];
+  
+    _colorIndicatorView = [[UIView alloc] initWithFrame:rectWithOffset];
     _colorIndicatorView.autoresizingMask = (UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth);
     _colorIndicatorView.backgroundColor = self.defaultColor ? self.defaultColor : [UIColor clearColor];
     [self addSubview:_colorIndicatorView];
@@ -671,6 +673,13 @@ typedef NS_ENUM(NSUInteger, MCSwipeTableViewCellDirection) {
     UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return image;
+}
+
+- (CGRect)addRectToRect:(CGRect)firstRect secondRect:(CGRect)secondRect {
+  return CGRectMake(firstRect.origin.x + secondRect.origin.x,
+                    firstRect.origin.y + secondRect.origin.y,
+                    firstRect.size.width + secondRect.size.width,
+                    firstRect.size.height + secondRect.size.height);
 }
 
 #pragma mark - Completion block
